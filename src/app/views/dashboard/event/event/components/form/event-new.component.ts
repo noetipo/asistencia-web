@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 // @ts-ignore
 import {abcForms, typesReceta} from 'src/environments/generals';
-import {PeriodService} from "../../../../../../providers/services";
 import {ConfirmDialogService} from "../../../../../../shared";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Institution} from "../../../../Setup/person/models/institution";
@@ -14,6 +13,12 @@ import {SubsidiaryService} from "../../../../../../providers/services/setup/subs
 import {FacultyService} from "../../../../../../providers/services/setup/faculty.service";
 import {ProfessionalSchoolService} from "../../../../../../providers/services/setup/professional-school.service";
 import {EventService} from "../../../../../../providers/services/event/event.service";
+import {EventDetail} from "../../models/eventDetail";
+import {PersonService} from "../../../../../../providers/services/setup/person.service";
+import {CycleService, GroupService} from "../../../../../../providers/services";
+import {Cycle} from "../../models/cycle";
+import {Group} from "../../models/group";
+import {Person} from "../../../../Setup/person/models/person";
 
 @Component({
   selector: 'app-event-new',
@@ -28,8 +33,6 @@ import {EventService} from "../../../../../../providers/services/event/event.ser
         </li>
       </ul>
       <form [formGroup]="eventForm" class="row mt-2 d-flex justify-content-start align-items-center ">
-
-
         <div class="form-group col-md-2 required">
           <div class="input-group input-group-sm">
             <label class="col-form-label"><b>Evento. </b></label>
@@ -133,7 +136,162 @@ import {EventService} from "../../../../../../providers/services/event/event.ser
         </div>
 
       </form>
+      <div class="col-md-5 d-flex justify-content-end align-items-end mb-3">
+        <button type="button" (click)="addActivity()" class="btn-gm-danger">
+          <span class="{{ abcForms.btnNew.icon }} lamb-icon"></span> {{ abcForms.btnNew.label }} Actividad
+        </button>
+      </div>
+
+      <div class="responsive-table">
+        <table class="table table-lg table-hover table-striped table-sm">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Actividad</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Acciones</th>
+          </tr>
+          </thead>
+          <tbody class="table-group-divider">
+          <tr *ngFor="let v of eventDetails ; let i=index">
+            <th scope="row">{{i + 1}}</th>
+            <td data-title="Evento"><input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="v.nombre"></td>
+            <td data-title="Descripcion"><input type="text" class="form-control form-control-sm" ngbDatepicker
+                                                #d2="ngbDatepicker"
+                                                (click)="d2.toggle()" [(ngModel)]="v.fecha"
+                                                placeholder="Fecha">
+            </td>
+            <td data-title="Acciones">
+              <button type="button" class="btn-gm-sm btn btn-danger text-white btn-gm-small"
+                      title="{{ abcForms.btnDelete.label }}" (click)="goDelete(i)">
+                <span class="{{ abcForms.btnDelete.icon }}"></span>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
       <hr>
+
+      <form [formGroup]="eventForm" class="row mt-2 d-flex justify-content-start align-items-center ">
+        <div class="form-group col-md-3 ">
+          <div class="input-group input-group-sm input-group-rounded row mx-auto">
+            <label class="col-form-label"><b>Ciclo. </b> </label>
+            <select class="form-control form-select form-control-sm" formControlName="ciclo"
+                    id="ciclo">
+              <option value=0>Seleccione Ciclo</option>
+              <option *ngFor="let l of cycles" [value]="l.id">
+                {{l.id}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group col-md-3 ">
+          <div class="input-group input-group-sm input-group-rounded row mx-auto">
+            <label class="col-form-label"><b>Grupo.</b> </label>
+            <select class="form-control form-select form-control-sm" formControlName="grupo"
+                    id="grupo">
+              <option value=0>Seleccione Grupo</option>
+              <option *ngFor="let l of groups" [value]="l.id">
+                {{l.id}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="responsive-table">
+      <table class="table table-lg table-hover table-striped table-sm">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Código</th>
+          <th scope="col">DNI</th>
+          <th scope="col">Nombres</th>
+          <th scope="col">Ciclo</th>
+          <th scope="col">Grupo</th>
+          <th scope="col">Institucion</th>
+          <th scope="col">Filial</th>
+          <th scope="col">Facultad</th>
+          <th scope="col">E.P</th>
+          <th scope="col">Estado</th>
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        <tr *ngFor="let v of persons ; let i=index">
+          <th scope="row">{{i + 1}}</th>
+          <td data-title="Código">{{v.codigo}}</td>
+          <td data-title="DNI">{{v.dni}}</td>
+          <td data-title="Nombres">{{v.nombres}}</td>
+          <td data-title="Ciclo">{{v.ciclo}}</td>
+          <td data-title="Grupo">{{v.grupo}}</td>
+          <td data-title="Institucion">{{v.escuelaProfesional!.facultad!.filial!.institucion!.descripcion!}}</td>
+          <td data-title="Filial">{{v.escuelaProfesional!.facultad!.filial!.descripcion!}}</td>
+          <td data-title="Facultad">{{v.escuelaProfesional!.facultad!.descripcion!}}</td>
+          <td data-title="E.P.">{{v.escuelaProfesional!.descripcion!}}</td>
+          <td data-title="Estado">
+                        <span class="badge text-bg-{{v.estado?'success': 'danger'}} text-white">
+                            {{v.estado ? 'Activo' : 'Inactivo'}}
+                        </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button type="button" class="btn {{ abcForms.btnSave.class }} btn-sm" (click)="personTution()">
+      <span class="{{ abcForms.btnSave.icon }} lamb-icon"></span> {{ abcForms.btnSave.label }}
+    </button>
+
+    <div class="responsive-table">
+      <table class="table table-lg table-hover table-striped table-sm">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Código</th>
+          <th scope="col">DNI</th>
+          <th scope="col">Nombres</th>
+          <th scope="col">Ciclo</th>
+          <th scope="col">Grupo</th>
+          <th scope="col">Institucion</th>
+          <th scope="col">Filial</th>
+          <th scope="col">Facultad</th>
+          <th scope="col">E.P</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        <tr *ngFor="let v of personsTutions ; let i=index">
+          <th scope="row">{{i + 1}}</th>
+          <td data-title="Código">{{v.codigo}}</td>
+          <td data-title="DNI">{{v.dni}}</td>
+          <td data-title="Nombres">{{v.nombres}}</td>
+          <td data-title="Ciclo">{{v.ciclo}}</td>
+          <td data-title="Grupo">{{v.grupo}}</td>
+          <td data-title="Institucion">{{v.escuelaProfesional!.facultad!.filial!.institucion!.descripcion!}}</td>
+          <td data-title="Filial">{{v.escuelaProfesional!.facultad!.filial!.descripcion!}}</td>
+          <td data-title="Facultad">{{v.escuelaProfesional!.facultad!.descripcion!}}</td>
+          <td data-title="E.P.">{{v.escuelaProfesional!.descripcion!}}</td>
+          <td data-title="Estado">
+                        <span class="badge text-bg-{{v.estado?'success': 'danger'}} text-white">
+                            {{v.estado ? 'Activo' : 'Inactivo'}}
+                        </span>
+          </td>
+
+          <td data-title="Acciones">
+
+            <button type="button" class="btn-gm-sm btn btn-danger text-white btn-gm-small"
+                    title="{{ abcForms.btnDelete.label }}" (click)="goDeletePerson(i)">
+              <span class="{{ abcForms.btnDelete.icon }}"></span>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
     <div>
       <div class="mt-4 d-flex justify-content-end">
@@ -156,6 +314,11 @@ export class EventNewComponent implements OnInit {
   public subsidiarys: Subsidiary[] = [];
   public facultys: Faculty[] = [];
   public profesionalSchools: ProfessionalSchool[] = [];
+  public cycles: Cycle[] = [];
+  public groups: Group[] = [];
+  public eventDetails: any[] = [];
+  public persons: Person[] = [];
+  public personsTutions: Person[] = [];
   eventForm = new FormGroup({
     nombre: new FormControl('', [Validators.required]),
     tolerancia: new FormControl('', [Validators.required]),
@@ -165,19 +328,25 @@ export class EventNewComponent implements OnInit {
     filialId: new FormControl(0, [Validators.required]),
     facultadId: new FormControl(0, [Validators.required]),
     escuelaProfesionalId: new FormControl(0, [Validators.required]),
+    escuelaProfesional: new FormControl({}),
+    ciclo: new FormControl(''),
+    grupo: new FormControl(''),
     eventoDetalles: new FormControl([[]]),
-    matriculas: new FormControl([[]]),
+    matriculas: new FormControl([]),
   });
 
 
   constructor(
+    private cycleService: CycleService,
+    private groupService: GroupService,
+    private personService: PersonService,
     private eventService: EventService,
     private institutionService: InstitutionService,
-              private subsidiaryService: SubsidiaryService,
-              private facultyService: FacultyService,
-              private professionalSchoolService: ProfessionalSchoolService,
-              private confirmDialogService: ConfirmDialogService,
-              private router: Router, private route: ActivatedRoute) {
+    private subsidiaryService: SubsidiaryService,
+    private facultyService: FacultyService,
+    private professionalSchoolService: ProfessionalSchoolService,
+    private confirmDialogService: ConfirmDialogService,
+    private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -193,6 +362,36 @@ export class EventNewComponent implements OnInit {
     this.eventForm.controls['facultadId'].valueChanges.subscribe(val => {
       this.getProssionalSchool(val!);
     });
+    this.eventForm.controls['escuelaProfesionalId'].valueChanges.subscribe(val => {
+      this.getCycles(val!);
+    });
+    this.eventForm.controls['ciclo'].valueChanges.subscribe(val => {
+      this.getGroups(val!);
+    });
+    this.eventForm.controls['grupo'].valueChanges.subscribe(val => {
+      this.getPersons(val!);
+    });
+    this.eventDetails.push({nombre: '', fecha: this.sysDate()});
+  }
+
+  public getCycles(idEscuelaProfesional: number): void {
+    this.cycleService.getWithQuery$({idEscuelaProfesional: idEscuelaProfesional}).subscribe(response => {
+      this.cycles = response;
+    });
+
+  }
+
+  public getGroups(cycle: string): void {
+    const params: any = {};
+    params.idEscuelaProfesional = this.eventForm.value.escuelaProfesionalId;
+    params.ciclo = cycle;
+    this.groupService.getWithQuery$(params).subscribe(response => {
+      this.groups = response;
+    });
+  }
+
+  public addActivity(): void {
+    this.eventDetails.push({nombre: '', fecha: this.sysDate()})
   }
 
   public getInstitutions(params?: Object): void {
@@ -228,7 +427,55 @@ export class EventNewComponent implements OnInit {
     });
   }
 
+  public getPersons(grupo: string): void {
+    const params: any = {};
+    params.ciclo = this.eventForm.value.ciclo;
+    params.grupo = grupo;
+    params.escuelaProfesionalId = this.eventForm.value.escuelaProfesionalId;
+    this.personService.getForTuition$(params).subscribe(response => {
+      this.persons = response;
+    }, error => {
+      this.error = error;
+    });
+  }
+
+  public goDelete(i: number): void {
+    this.eventDetails.splice(i, 1);
+
+  }
+
+  public goDeletePerson(i: number): void {
+    this.persons.splice(i, 1);
+  }
+
+  public personTution(): void {
+    this.personsTutions = [...this.personsTutions, ...this.persons]
+    this.persons = [];
+  }
+
   public saveForm(): void {
+    const professionalSchool: any = {};
+    professionalSchool.id = this.eventForm.value.escuelaProfesionalId;
+    this.eventForm.value.escuelaProfesional = professionalSchool;
+    const datesArray: EventDetail[] = [];
+    this.eventDetails.forEach(data => {
+      // @ts-ignore
+      datesArray.push({
+        nombre: data.nombre,
+        fecha: `${data!.fecha?.year}-${this.addZero(data.fecha!.month)}-${this.addZero(data.fecha!.day)}`
+      });
+    });
+    // @ts-ignore
+    this.eventForm.value.eventoDetalles = datesArray;
+    const listPersons: any[] = [];
+    this.personsTutions.map(data => {
+        const dataPerson: any = {};
+        dataPerson.persona = {id: data.id};
+        listPersons.push(dataPerson);
+      }
+    );
+    // @ts-ignore
+    this.eventForm.value.matriculas = listPersons;
     if (this.eventForm.valid) {
       // @ts-ignore
       this.confirmDialogService.confirmSave().then(() => {
@@ -245,5 +492,27 @@ export class EventNewComponent implements OnInit {
   public cancelForm(): void {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
+
+  private addZero(value: string): string {
+    let dataValue: string;
+    if (+value < 10) {
+      dataValue = '0' + value.toString();
+    } else {
+      dataValue = value;
+    }
+    return dataValue;
+  }
+
+  private sysDate(sumDays?: any): {} {
+    const today = new Date();
+    if (sumDays) {
+      today.setDate(today.getDate() + parseInt(sumDays));
+    }
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    return {year: +yyyy, month: +mm, day: +dd};
+  }
+
 
 }

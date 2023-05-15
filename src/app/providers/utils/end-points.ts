@@ -15,9 +15,14 @@ export const END_POINTS = {
     subsidiary: 'filial',
     faculty: 'facultad',
     prefessionalSchool: 'escuela-profesional',
+    cycle: 'ciclo',
+    group: 'grupo',
   },
   event: {
     event: 'evento',
+  },
+  attendance: {
+    attendance: 'asistencia',
   },
   /*****---------- */
   userModules: 'user-modules',

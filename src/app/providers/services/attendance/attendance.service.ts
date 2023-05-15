@@ -4,13 +4,12 @@ import {END_POINTS, EntityDataService} from '../../utils';
 import {Observable} from "rxjs";
 
 @Injectable({providedIn: 'root'})
-export class PersonService extends EntityDataService<any> {
+export class AttendanceService extends EntityDataService<any> {
   constructor(protected override httpClient: HttpClient) {
-    super(httpClient, END_POINTS.setup.person);
+    super(httpClient, END_POINTS.attendance.attendance);
   }
 
-  public getForTuition$(params?: any): Observable<any> {
-    return this.httpClient.get<any>(`${this.endPoint}/matricula`, {params: params});
+  public getForReport$(id: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.endPoint}/reporte/${id}`);
   }
-
 }

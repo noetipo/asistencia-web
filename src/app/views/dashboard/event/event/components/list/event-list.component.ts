@@ -33,10 +33,10 @@ import {Event} from "../../models/event";
                   <td data-title="Evento">{{v.nombre}}</td>
                   <td data-title="Descripcion">{{v.descripcion}}</td>
                   <td data-title="Tolerancia">{{v.tolerancia}}</td>
-                  <td data-title="Institucion">{{v.escuelaProfesional!.facultad!.filial!.institucion!.descripcion!}}</td>
-                  <td data-title="Filial">{{v.escuelaProfesional!.facultad!.filial!.descripcion!}}</td>
-                  <td data-title="Facultad">{{v.escuelaProfesional!.facultad!.descripcion!}}</td>
-                  <td data-title="E.P.">{{v.escuelaProfesional!.descripcion!}}</td>
+                  <td data-title="Institucion">{{v.escuelaProfesional?.facultad?.filial?.institucion?.descripcion}}</td>
+                  <td data-title="Filial">{{v.escuelaProfesional?.facultad?.filial?.descripcion}}</td>
+                  <td data-title="Facultad">{{v.escuelaProfesional?.facultad?.descripcion}}</td>
+                  <td data-title="E.P.">{{v.escuelaProfesional?.descripcion}}</td>
                   <td data-title="Estado">
                         <span class="badge text-bg-{{v.estado?'success': 'danger'}} text-white">
                             {{v.estado ? 'Activo' : 'Inactivo'}}

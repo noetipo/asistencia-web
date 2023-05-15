@@ -14,7 +14,7 @@ constructor(private el: ElementRef) {
  }
  // @ts-ignore
 
-  @HostListener('keydown', [ '$event' ])
+  @HostListener('keydown', [ '$attendance' ])
  onKeyDown(event: KeyboardEvent) {
  // Allow Backspace, tab, end, and home keys
  if (this.specialKeys.indexOf(event.key) !== -1) {

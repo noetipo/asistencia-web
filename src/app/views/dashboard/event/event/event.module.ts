@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
-import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDatepickerModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {EventRoutingModule, rutedComponents} from './event-routing.module';
 import {EventListComponent} from './components/list/event-list.component';
 import {ConfirmDialogModule, FormsComponentValidModule, PaginationModule} from '../../../../shared';
@@ -27,6 +27,7 @@ const NG_MODULES: any = [];
 
 const NGB_MODULES: any = [
   NgbModalModule,
+  NgbDatepickerModule
   // NgbPopoverModule,
 ];
 const PIPES: any = [];

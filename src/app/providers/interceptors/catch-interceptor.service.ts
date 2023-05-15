@@ -65,7 +65,7 @@ export class CatchInterceptorService implements HttpInterceptor {
   }
 
   private getOnlyUrlResource(event: HttpResponse<any>) {
-    //const resource = (event.url).replace(environment.url, '');
+    //const resource = (attendance.url).replace(environment.url, '');
     //return resource;
   }
 
