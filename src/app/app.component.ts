@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser';
   template: '<router-outlet> <ngx-loading-bar  color="#3742bd" height="8px"></ngx-loading-bar></router-outlet>',
 })
 export class AppComponent implements OnInit {
-  title = 'LIDMAN AUTOMOTRIZ';
+  title = 'UNIVERSIDAD PERUANA UNION';
 
   constructor(
     private router: Router,

@@ -9,7 +9,11 @@ export class AttendanceService extends EntityDataService<any> {
     super(httpClient, END_POINTS.attendance.attendance);
   }
 
-  public getForReport$(id: number): Observable<any> {
-    return this.httpClient.get<any>(`${this.endPoint}/reporte/${id}`);
+  public getForReport$(paramas: any): Observable<any> {
+    return this.httpClient.get<any>(`${this.endPoint}/reporte`, {params: paramas});
+  }
+
+  public saveAttendance$(paramas: any): Observable<any> {
+    return this.httpClient.get<any>(`${this.endPoint}/registro`, {params: paramas});
   }
 }

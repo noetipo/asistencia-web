@@ -101,6 +101,18 @@ import {Attendance} from "../models/attendance";
             </select>
           </div>
         </div>
+        <div class="form-group col-md-2 required">
+          <div class="input-group input-group-sm">
+            <label class="col-form-label"><b>Evento. </b></label>
+          </div>
+          <div class="input-group input-group-sm input-group-rounded">
+            <input type="text" class="form-control form-control-sm" formControlName="dni"
+                   id="dni"
+                   placeholder="DNI/CODIGO">
+          </div>
+          <app-form-validate-errors [group]="attendanceForm"
+                                    [controlName]="'dni'"></app-form-validate-errors>
+        </div>
       </form>
     </div>
     <div class="responsive-table">
@@ -161,6 +173,7 @@ export class AttendanceContainersComponent implements OnInit {
     escuelaProfesionalId: new FormControl(0, [Validators.required]),
     evento: new FormControl(Event),
     eventoDetalleId: new FormControl(0),
+    dni: new FormControl('', [Validators.required]),
   });
 
   constructor(
@@ -245,7 +258,10 @@ export class AttendanceContainersComponent implements OnInit {
   }
 
   public getAttendance(id: number): void {
-    this.attendanceService.getForReport$(id).subscribe(response => {
+    const params: any = {};
+    params.eventoId = this.event.id;
+    params.actividadId = id;
+    this.attendanceService.getForReport$(params).subscribe(response => {
       this.attendances = response;
     }, error => {
       this.error = error;
@@ -253,6 +269,19 @@ export class AttendanceContainersComponent implements OnInit {
   }
 
   public saveForm(): void {
-    console.log(this.attendanceForm.value);
+
+    const params: any = {};
+    params.eventoDetalleId = this.attendanceForm.value.eventoDetalleId!;
+    params.eventoId = this.event.id!
+    params.dni = this.attendanceForm.value.dni!;
+    this.attendanceService.saveAttendance$(params).subscribe(response => {
+      if (response) {
+        this.getAttendance(this.attendanceForm.value.eventoDetalleId!);
+      }
+
+    }, error => {
+      this.error = error;
+    });
+
   }
 }
