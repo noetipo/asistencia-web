@@ -14,21 +14,21 @@ const routes: Routes = [
         path: '',
         component: PeriodContainersComponent,
         data:{
-          title:'Vehículo'
+          title:'Periodo'
         }
       },
       {
         path: 'new',
         component: PeriodNewComponent,
         data:{
-          title:'Nuevo Vehículo'
+          title:'Nuevo Periodo'
         }
       },
       {
         path: 'edit',
         component: PeriodEditComponent,
         data:{
-          title:'Editar Vehículo'
+          title:'Editar Periodo'
         }
       },
     ],

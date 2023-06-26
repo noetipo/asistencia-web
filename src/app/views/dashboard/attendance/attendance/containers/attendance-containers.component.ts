@@ -20,11 +20,6 @@ import {Attendance} from "../models/attendance";
   selector: 'app-attendance-container',
   template: `
     <div>
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active"><i class="{{ abcForms.btnNew.icon }}"></i> Nuevo Evento</a>
-        </li>
-      </ul>
       <form [formGroup]="attendanceForm" class="row mt-2 d-flex justify-content-start align-items-center ">
 
 
@@ -113,8 +108,23 @@ import {Attendance} from "../models/attendance";
           <app-form-validate-errors [group]="attendanceForm"
                                     [controlName]="'dni'"></app-form-validate-errors>
         </div>
+
+        <div class="form-group col-md-2 required">
+          <div class="input-group input-group-sm">
+            <label class="col-form-label"><b>Registrar. </b></label>
+          </div>
+          <div class="input-group input-group-sm input-group-rounded">
+            <button type="button" class="btn {{ abcForms.btnSave.class }} btn-sm" (click)="saveForm()"
+                    [disabled]="attendanceForm.invalid">
+              <span class="{{ abcForms.btnSave.icon }} lamb-icon"></span> Registrar Asistencia
+            </button>
+          </div>
+
+        </div>
+
       </form>
     </div>
+    <hr>
     <div class="responsive-table">
       <table class="table table-lg table-hover table-striped table-sm">
         <thead>
@@ -142,14 +152,6 @@ import {Attendance} from "../models/attendance";
         </tr>
         </tbody>
       </table>
-    </div>
-    <div>
-      <div class="mt-4 d-flex justify-content-end">
-        <button type="button" class="btn {{ abcForms.btnSave.class }} btn-sm" (click)="saveForm()"
-                [disabled]="attendanceForm.invalid">
-          <span class="{{ abcForms.btnSave.icon }} lamb-icon"></span> {{ abcForms.btnSave.label }}
-        </button>
-      </div>
     </div>
   `
 })

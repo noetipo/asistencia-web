@@ -7,11 +7,14 @@ import {PeriodService} from "../../../../../providers/services";
 @Component({
   selector: 'app-attendance-container',
   template: `
-    <app-period-list [periods]="periods"
-                     (eventEdit)="eventEdit($event)"
-                     (eventDelete)="eventDelete($event)"
-                     (eventNew)="eventNew($event)"
-    ></app-period-list>
+
+      <app-period-list [periods]="periods"
+                       (eventEdit)="eventEdit($event)"
+                       (eventDelete)="eventDelete($event)"
+                       (eventNew)="eventNew($event)"
+      ></app-period-list>
+
+
   `
 })
 

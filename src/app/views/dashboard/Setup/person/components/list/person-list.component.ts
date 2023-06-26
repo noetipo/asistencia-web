@@ -6,10 +6,11 @@ import {Person} from "../../models/person";
 @Component({
   selector: 'app-person-list',
   template: `
-      <div class="col-md-5 d-flex justify-content-end align-items-end mb-3">
-          <button type="button" (click)="goNew()" class="btn-gm-danger">
+    <div class="float-end">
+          <button type="button" (click)="goNew()" class="btn-gm-danger float-right">
               <span class="{{ abcForms.btnNew.icon }} lamb-icon"></span> {{ abcForms.btnNew.label }} Persona
           </button>
+
       </div>
       <div class="responsive-table">
           <table class="table table-lg table-hover table-striped table-sm">

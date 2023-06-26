@@ -5,7 +5,6 @@ import {abcForms} from "../../../../../environments/generals";
   template: `
     <div class="card shadow-gm-card m-1">
       <div class="card-body">
-        <h1 class="fa-3x icon-gm-float"><i class="{{abcForm.btnCar.icon}}"></i></h1>
         <router-outlet></router-outlet>
       </div>
     </div>

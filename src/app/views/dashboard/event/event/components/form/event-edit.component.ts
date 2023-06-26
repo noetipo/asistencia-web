@@ -30,7 +30,7 @@ import {Tuition} from "../../models/tuition";
       <div>
           <ul class="nav nav-tabs">
               <li class="nav-item">
-                  <a class="nav-link active"><i class="{{ abcForms.btnNew.icon }}"></i> Nuevo Evento</a>
+                  <a class="nav-link active"><i class="{{ abcForms.btnNew.icon }}"></i> Editar Evento</a>
               </li>
           </ul>
           <form [formGroup]="eventForm" class="row mt-2 d-flex justify-content-start align-items-center ">
@@ -137,7 +137,7 @@ import {Tuition} from "../../models/tuition";
               </div>
 
           </form>
-          <div class="col-md-5 d-flex justify-content-end align-items-end mb-3">
+          <div class="float-end">
               <button type="button" (click)="addActivity()" class="btn-gm-danger">
                   <span class="{{ abcForms.btnNew.icon }} lamb-icon"></span> {{ abcForms.btnNew.label }} Actividad
               </button>
@@ -203,7 +203,7 @@ import {Tuition} from "../../models/tuition";
               </div>
           </form>
       </div>
-
+      <hr>
       <div class="responsive-table">
           <table class="table table-lg table-hover table-striped table-sm">
               <thead>
@@ -243,10 +243,11 @@ import {Tuition} from "../../models/tuition";
           </table>
       </div>
 
-      <button type="button" class="btn {{ abcForms.btnSave.class }} btn-sm" (click)="personTution()">
-          <span class="{{ abcForms.btnSave.icon }} lamb-icon"></span> {{ abcForms.btnSave.label }}
-      </button>
-
+      <div class="float-end">
+        <button type="button" class="btn-gm-danger" (click)="personTution()">
+          <span class="{{ abcForms.btnSave.icon }} lamb-icon"></span> Matricular
+        </button>
+      </div>
       <div class="responsive-table">
           <table class="table table-lg table-hover table-striped table-sm">
               <thead>

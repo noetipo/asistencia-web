@@ -6,7 +6,7 @@ import {Period} from "../../models/period";
 @Component({
   selector: 'app-period-list',
   template: `
-    <div class="col-md-5 d-flex justify-content-end align-items-end mb-3">
+    <div class="float-end">
       <button type="button" (click)="goNew()" class="btn-gm-danger">
         <span class="{{ abcForms.btnNew.icon }} lamb-icon"></span> {{ abcForms.btnNew.label }} Periodo
       </button>

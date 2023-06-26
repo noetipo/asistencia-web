@@ -23,287 +23,290 @@ import {Person} from "../../../../Setup/person/models/person";
 @Component({
   selector: 'app-event-new',
   template: `
-    <button type="button" class="close btn-gm-return mb-2" aria-label="Close" (click)="cancelForm()">
-      <span class="{{ abcForms.btnReturn.icon }}"></span> Regresar
-    </button>
-    <div>
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active"><i class="{{ abcForms.btnNew.icon }}"></i> Nuevo Evento</a>
-        </li>
-      </ul>
-      <form [formGroup]="eventForm" class="row mt-2 d-flex justify-content-start align-items-center ">
-        <div class="form-group col-md-2 required">
-          <div class="input-group input-group-sm">
-            <label class="col-form-label"><b>Evento. </b></label>
-          </div>
-          <div class="input-group input-group-sm input-group-rounded">
-            <input type="text" class="form-control form-control-sm" formControlName="nombre"
-                   id="nombre"
-                   placeholder="Evento ...">
-          </div>
-          <app-form-validate-errors [group]="eventForm"
-                                    [controlName]="'nombre'"></app-form-validate-errors>
-        </div>
-        <div class="form-group col-md-2 required">
-          <div class="input-group input-group-sm">
-            <label class="col-form-label"><b>Descripción. </b></label>
-          </div>
-          <div class="input-group input-group-sm input-group-rounded">
-            <input type="text" class="form-control form-control-sm" formControlName="descripcion"
-                   id="descripcion"
-                   placeholder="2023">
-          </div>
-          <app-form-validate-errors [group]="eventForm"
-                                    [controlName]="'descripcion'"></app-form-validate-errors>
-        </div>
-        <div class="form-group col-md-2 required">
-          <div class="input-group input-group-sm">
-            <label class="col-form-label"><b>Tolerancia. </b></label>
-          </div>
-          <div class="input-group input-group-sm input-group-rounded">
-            <input type="text" class="form-control form-control-sm" formControlName="tolerancia"
-                   id="tolerancia"
-                   placeholder="10">
-          </div>
-          <app-form-validate-errors [group]="eventForm"
-                                    [controlName]="'tolerancia'"></app-form-validate-errors>
-        </div>
-        <div class="form-group col-md-3 ">
-          <div class="input-group input-group-sm input-group-rounded row mx-auto">
-            <label class="col-form-label"><b>Institucion. </b> </label>
-            <select class="form-control form-select form-control-sm" formControlName="institucionId"
-                    id="institucionId">
-              <option value=0>Selecciona Institucion</option>
-              <option *ngFor="let l of institutions" [value]="l.id">
-                {{l.descripcion}}
-              </option>
-            </select>
-          </div>
-        </div>
+      <button type="button" class="close btn-gm-return mb-2" aria-label="Close" (click)="cancelForm()">
+          <span class="{{ abcForms.btnReturn.icon }}"></span> Regresar
+      </button>
+      <div>
+          <ul class="nav nav-tabs">
+              <li class="nav-item">
+                  <a class="nav-link active"><i class="{{ abcForms.btnNew.icon }}"></i> Nuevo Evento</a>
+              </li>
+          </ul>
+          <form [formGroup]="eventForm" class="row mt-2 d-flex justify-content-start align-items-center">
+              <div class="form-group col-md-2 required">
+                  <div class="input-group input-group-sm">
+                      <label class="col-form-label"><b>Evento. </b></label>
+                  </div>
+                  <div class="input-group input-group-sm input-group-rounded">
+                      <input type="text" class="form-control form-control-sm" formControlName="nombre"
+                             id="nombre"
+                             placeholder="Evento ...">
+                  </div>
+                  <app-form-validate-errors [group]="eventForm"
+                                            [controlName]="'nombre'"></app-form-validate-errors>
+              </div>
+              <div class="form-group col-md-2 required">
+                  <div class="input-group input-group-sm">
+                      <label class="col-form-label"><b>Descripción. </b></label>
+                  </div>
+                  <div class="input-group input-group-sm input-group-rounded">
+                      <input type="text" class="form-control form-control-sm" formControlName="descripcion"
+                             id="descripcion"
+                             placeholder="2023">
+                  </div>
+                  <app-form-validate-errors [group]="eventForm"
+                                            [controlName]="'descripcion'"></app-form-validate-errors>
+              </div>
+              <div class="form-group col-md-2 required">
+                  <div class="input-group input-group-sm">
+                      <label class="col-form-label"><b>Tolerancia. </b></label>
+                  </div>
+                  <div class="input-group input-group-sm input-group-rounded">
+                      <input type="text" class="form-control form-control-sm" formControlName="tolerancia"
+                             id="tolerancia"
+                             placeholder="10">
+                  </div>
+                  <app-form-validate-errors [group]="eventForm"
+                                            [controlName]="'tolerancia'"></app-form-validate-errors>
+              </div>
+              <div class="form-group col-md-3 ">
+                  <div class="input-group input-group-sm input-group-rounded row mx-auto">
+                      <label class="col-form-label"><b>Institucion. </b> </label>
+                      <select class="form-control form-select form-control-sm" formControlName="institucionId"
+                              id="institucionId">
+                          <option value=0>Selecciona Institucion</option>
+                          <option *ngFor="let l of institutions" [value]="l.id">
+                              {{l.descripcion}}
+                          </option>
+                      </select>
+                  </div>
+              </div>
 
-        <div class="form-group col-md-3 ">
-          <div class="input-group input-group-sm input-group-rounded row mx-auto">
-            <label class="col-form-label"><b>Filial. </b> </label>
-            <select class="form-control form-select form-control-sm" formControlName="filialId"
-                    id="filialId">
-              <option value=0>Selecciona Filial</option>
-              <option *ngFor="let l of subsidiarys" [value]="l.id">
-                {{l.descripcion}}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group col-md-3 ">
-          <div class="input-group input-group-sm input-group-rounded row mx-auto">
-            <label class="col-form-label"><b>Facultad. </b> </label>
-            <select class="form-control form-select form-control-sm" formControlName="facultadId"
-                    id="facultadId">
-              <option value=0>Selecciona Facultad</option>
-              <option *ngFor="let l of facultys" [value]="l.id">
-                {{l.descripcion}}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group col-md-3 ">
-          <div class="input-group input-group-sm input-group-rounded row mx-auto">
-            <label class="col-form-label"><b>Escuela Profesional. </b> </label>
-            <select class="form-control form-select form-control-sm" formControlName="escuelaProfesionalId"
-                    id="escuelaProfesionalId">
-              <option value=0>Seleccione Escuela Profesinal</option>
-              <option *ngFor="let l of profesionalSchools" [value]="l.id">
-                {{l.descripcion}}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group col-md-2">
-          <div class="input-group input-group-sm input-group-rounded">
-            <div class="input-group input-group-sm">
-              <label class="col-form-label"><b>Estado.</b></label>
-            </div>
-            <div class="custom-control custom-checkbox d-flex align-items-center">
-              <input type="checkbox" class="custom-control-input" id="estado"
-                     formControlName="estado">
-              <label class="custom-control-label todo-label badge-gm" for="estado">
+              <div class="form-group col-md-3 ">
+                  <div class="input-group input-group-sm input-group-rounded row mx-auto">
+                      <label class="col-form-label"><b>Filial. </b> </label>
+                      <select class="form-control form-select form-control-sm" formControlName="filialId"
+                              id="filialId">
+                          <option value=0>Selecciona Filial</option>
+                          <option *ngFor="let l of subsidiarys" [value]="l.id">
+                              {{l.descripcion}}
+                          </option>
+                      </select>
+                  </div>
+              </div>
+              <div class="form-group col-md-3 ">
+                  <div class="input-group input-group-sm input-group-rounded row mx-auto">
+                      <label class="col-form-label"><b>Facultad. </b> </label>
+                      <select class="form-control form-select form-control-sm" formControlName="facultadId"
+                              id="facultadId">
+                          <option value=0>Selecciona Facultad</option>
+                          <option *ngFor="let l of facultys" [value]="l.id">
+                              {{l.descripcion}}
+                          </option>
+                      </select>
+                  </div>
+              </div>
+              <div class="form-group col-md-3 ">
+                  <div class="input-group input-group-sm input-group-rounded row mx-auto">
+                      <label class="col-form-label"><b>Escuela Profesional. </b> </label>
+                      <select class="form-control form-select form-control-sm" formControlName="escuelaProfesionalId"
+                              id="escuelaProfesionalId">
+                          <option value=0>Seleccione Escuela Profesinal</option>
+                          <option *ngFor="let l of profesionalSchools" [value]="l.id">
+                              {{l.descripcion}}
+                          </option>
+                      </select>
+                  </div>
+              </div>
+              <div class="form-group col-md-2">
+                  <div class="input-group input-group-sm input-group-rounded">
+                      <div class="input-group input-group-sm">
+                          <label class="col-form-label"><b>Estado.</b></label>
+                      </div>
+                      <div class="custom-control custom-checkbox d-flex align-items-center">
+                          <input type="checkbox" class="custom-control-input" id="estado"
+                                 formControlName="estado">
+                          <label class="custom-control-label todo-label badge-gm" for="estado">
                             <span
-                              class="badge text-bg-{{eventForm.value.estado ?'success': 'danger'}} text-white">
+                                    class="badge text-bg-{{eventForm.value.estado ?'success': 'danger'}} text-white">
                             {{eventForm.value.estado ? 'ACTIVO' : 'INACTIVO'}}</span>
-              </label>
-            </div>
-          </div>
-        </div>
+                          </label>
+                      </div>
+                  </div>
+              </div>
 
-      </form>
-      <div class="col-md-5 d-flex justify-content-end align-items-end mb-3">
-        <button type="button" (click)="addActivity()" class="btn-gm-danger">
-          <span class="{{ abcForms.btnNew.icon }} lamb-icon"></span> {{ abcForms.btnNew.label }} Actividad
-        </button>
+          </form>
+
+          <div class="float-end">
+              <button type="button" (click)="addActivity()" class="btn-gm-danger">
+                  <span class="{{ abcForms.btnNew.icon }} lamb-icon"></span> {{ abcForms.btnNew.label }} Actividad
+              </button>
+          </div>
+
+          <div class="responsive-table">
+              <table class="table table-lg table-hover table-striped table-sm">
+                  <thead>
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Actividad</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Acciones</th>
+                  </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+                  <tr *ngFor="let v of eventDetails ; let i=index">
+                      <th scope="row">{{i + 1}}</th>
+                      <td data-title="Evento"><input type="text" class="form-control form-control-sm"
+                                                     [(ngModel)]="v.nombre"></td>
+                      <td data-title="Descripcion"><input type="text" class="form-control form-control-sm" ngbDatepicker
+                                                          #d2="ngbDatepicker"
+                                                          (click)="d2.toggle()" [(ngModel)]="v.fecha"
+                                                          placeholder="Fecha">
+                      </td>
+                      <td data-title="Acciones">
+                          <button type="button" class="btn-gm-sm btn btn-danger text-white btn-gm-small"
+                                  title="{{ abcForms.btnDelete.label }}" (click)="goDelete(i)">
+                              <span class="{{ abcForms.btnDelete.icon }}"></span>
+                          </button>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+
+          <hr>
+
+          <form [formGroup]="eventForm" class="row mt-2 d-flex justify-content-start align-items-center ">
+              <div class="form-group col-md-3 ">
+                  <div class="input-group input-group-sm input-group-rounded row mx-auto">
+                      <label class="col-form-label"><b>Ciclo. </b> </label>
+                      <select class="form-control form-select form-control-sm" formControlName="ciclo"
+                              id="ciclo">
+                          <option value=0>Seleccione Ciclo</option>
+                          <option *ngFor="let l of cycles" [value]="l.id">
+                              {{l.id}}
+                          </option>
+                      </select>
+                  </div>
+              </div>
+              <div class="form-group col-md-3 ">
+                  <div class="input-group input-group-sm input-group-rounded row mx-auto">
+                      <label class="col-form-label"><b>Grupo.</b> </label>
+                      <select class="form-control form-select form-control-sm" formControlName="grupo"
+                              id="grupo">
+                          <option value=0>Seleccione Grupo</option>
+                          <option *ngFor="let l of groups" [value]="l.id">
+                              {{l.id}}
+                          </option>
+                      </select>
+                  </div>
+              </div>
+          </form>
+          <hr>
       </div>
 
       <div class="responsive-table">
-        <table class="table table-lg table-hover table-striped table-sm">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Actividad</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Acciones</th>
-          </tr>
-          </thead>
-          <tbody class="table-group-divider">
-          <tr *ngFor="let v of eventDetails ; let i=index">
-            <th scope="row">{{i + 1}}</th>
-            <td data-title="Evento"><input type="text" class="form-control form-control-sm"
-                                           [(ngModel)]="v.nombre"></td>
-            <td data-title="Descripcion"><input type="text" class="form-control form-control-sm" ngbDatepicker
-                                                #d2="ngbDatepicker"
-                                                (click)="d2.toggle()" [(ngModel)]="v.fecha"
-                                                placeholder="Fecha">
-            </td>
-            <td data-title="Acciones">
-              <button type="button" class="btn-gm-sm btn btn-danger text-white btn-gm-small"
-                      title="{{ abcForms.btnDelete.label }}" (click)="goDelete(i)">
-                <span class="{{ abcForms.btnDelete.icon }}"></span>
+          <table class="table table-lg table-hover table-striped table-sm">
+              <thead>
+              <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Código</th>
+                  <th scope="col">DNI</th>
+                  <th scope="col">Nombres</th>
+                  <th scope="col">Ciclo</th>
+                  <th scope="col">Grupo</th>
+                  <th scope="col">Institucion</th>
+                  <th scope="col">Filial</th>
+                  <th scope="col">Facultad</th>
+                  <th scope="col">E.P</th>
+                  <th scope="col">Estado</th>
+              </tr>
+              </thead>
+              <tbody class="table-group-divider">
+              <tr *ngFor="let v of persons ; let i=index">
+                  <th scope="row">{{i + 1}}</th>
+                  <td data-title="Código">{{v.codigo}}</td>
+                  <td data-title="DNI">{{v.dni}}</td>
+                  <td data-title="Nombres">{{v.nombres}}</td>
+                  <td data-title="Ciclo">{{v.ciclo}}</td>
+                  <td data-title="Grupo">{{v.grupo}}</td>
+                  <td data-title="Institucion">{{v.escuelaProfesional!.facultad!.filial!.institucion!.descripcion!}}</td>
+                  <td data-title="Filial">{{v.escuelaProfesional!.facultad!.filial!.descripcion!}}</td>
+                  <td data-title="Facultad">{{v.escuelaProfesional!.facultad!.descripcion!}}</td>
+                  <td data-title="E.P.">{{v.escuelaProfesional!.descripcion!}}</td>
+                  <td data-title="Estado">
+                        <span class="badge text-bg-{{v.estado?'success': 'danger'}} text-white">
+                            {{v.estado ? 'Activo' : 'Inactivo'}}
+                        </span>
+                  </td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+      <div class="float-end">
+          <button type="button" class="btn-gm-danger" (click)="personTution()">
+              <span class="{{ abcForms.btnSave.icon }} lamb-icon"></span> Matricular
+          </button>
+      </div>
+
+      <div class="responsive-table">
+          <table class="table table-lg table-hover table-striped table-sm">
+              <thead>
+              <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Código</th>
+                  <th scope="col">DNI</th>
+                  <th scope="col">Nombres</th>
+                  <th scope="col">Ciclo</th>
+                  <th scope="col">Grupo</th>
+                  <th scope="col">Institucion</th>
+                  <th scope="col">Filial</th>
+                  <th scope="col">Facultad</th>
+                  <th scope="col">E.P</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Acciones</th>
+              </tr>
+              </thead>
+              <tbody class="table-group-divider">
+              <tr *ngFor="let v of personsTutions ; let i=index">
+                  <th scope="row">{{i + 1}}</th>
+                  <td data-title="Código">{{v.codigo}}</td>
+                  <td data-title="DNI">{{v.dni}}</td>
+                  <td data-title="Nombres">{{v.nombres}}</td>
+                  <td data-title="Ciclo">{{v.ciclo}}</td>
+                  <td data-title="Grupo">{{v.grupo}}</td>
+                  <td data-title="Institucion">{{v.escuelaProfesional!.facultad!.filial!.institucion!.descripcion!}}</td>
+                  <td data-title="Filial">{{v.escuelaProfesional!.facultad!.filial!.descripcion!}}</td>
+                  <td data-title="Facultad">{{v.escuelaProfesional!.facultad!.descripcion!}}</td>
+                  <td data-title="E.P.">{{v.escuelaProfesional!.descripcion!}}</td>
+                  <td data-title="Estado">
+                        <span class="badge text-bg-{{v.estado?'success': 'danger'}} text-white">
+                            {{v.estado ? 'Activo' : 'Inactivo'}}
+                        </span>
+                  </td>
+
+                  <td data-title="Acciones">
+
+                      <button type="button" class="btn-gm-sm btn btn-danger text-white btn-gm-small"
+                              title="{{ abcForms.btnDelete.label }}" (click)="goDeletePerson(i)">
+                          <span class="{{ abcForms.btnDelete.icon }}"></span>
+                      </button>
+                  </td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+      <div>
+          <div class="mt-4 d-flex justify-content-end">
+              <button type="button" class="btn {{ abcForms.btnCancel.class }} btn-sm" (click)="cancelForm()">
+                  <span class="{{ abcForms.btnCancel.icon }} lamb-icon"></span> {{ abcForms.btnCancel.label }}
               </button>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <hr>
-
-      <form [formGroup]="eventForm" class="row mt-2 d-flex justify-content-start align-items-center ">
-        <div class="form-group col-md-3 ">
-          <div class="input-group input-group-sm input-group-rounded row mx-auto">
-            <label class="col-form-label"><b>Ciclo. </b> </label>
-            <select class="form-control form-select form-control-sm" formControlName="ciclo"
-                    id="ciclo">
-              <option value=0>Seleccione Ciclo</option>
-              <option *ngFor="let l of cycles" [value]="l.id">
-                {{l.id}}
-              </option>
-            </select>
+              <button type="button" class="btn {{ abcForms.btnSave.class }} btn-sm" (click)="saveForm()"
+                      [disabled]="eventForm.invalid">
+                  <span class="{{ abcForms.btnSave.icon }} lamb-icon"></span> {{ abcForms.btnSave.label }}
+              </button>
           </div>
-        </div>
-        <div class="form-group col-md-3 ">
-          <div class="input-group input-group-sm input-group-rounded row mx-auto">
-            <label class="col-form-label"><b>Grupo.</b> </label>
-            <select class="form-control form-select form-control-sm" formControlName="grupo"
-                    id="grupo">
-              <option value=0>Seleccione Grupo</option>
-              <option *ngFor="let l of groups" [value]="l.id">
-                {{l.id}}
-              </option>
-            </select>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <div class="responsive-table">
-      <table class="table table-lg table-hover table-striped table-sm">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Código</th>
-          <th scope="col">DNI</th>
-          <th scope="col">Nombres</th>
-          <th scope="col">Ciclo</th>
-          <th scope="col">Grupo</th>
-          <th scope="col">Institucion</th>
-          <th scope="col">Filial</th>
-          <th scope="col">Facultad</th>
-          <th scope="col">E.P</th>
-          <th scope="col">Estado</th>
-        </tr>
-        </thead>
-        <tbody class="table-group-divider">
-        <tr *ngFor="let v of persons ; let i=index">
-          <th scope="row">{{i + 1}}</th>
-          <td data-title="Código">{{v.codigo}}</td>
-          <td data-title="DNI">{{v.dni}}</td>
-          <td data-title="Nombres">{{v.nombres}}</td>
-          <td data-title="Ciclo">{{v.ciclo}}</td>
-          <td data-title="Grupo">{{v.grupo}}</td>
-          <td data-title="Institucion">{{v.escuelaProfesional!.facultad!.filial!.institucion!.descripcion!}}</td>
-          <td data-title="Filial">{{v.escuelaProfesional!.facultad!.filial!.descripcion!}}</td>
-          <td data-title="Facultad">{{v.escuelaProfesional!.facultad!.descripcion!}}</td>
-          <td data-title="E.P.">{{v.escuelaProfesional!.descripcion!}}</td>
-          <td data-title="Estado">
-                        <span class="badge text-bg-{{v.estado?'success': 'danger'}} text-white">
-                            {{v.estado ? 'Activo' : 'Inactivo'}}
-                        </span>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <button type="button" class="btn {{ abcForms.btnSave.class }} btn-sm" (click)="personTution()">
-      <span class="{{ abcForms.btnSave.icon }} lamb-icon"></span> {{ abcForms.btnSave.label }}
-    </button>
-
-    <div class="responsive-table">
-      <table class="table table-lg table-hover table-striped table-sm">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Código</th>
-          <th scope="col">DNI</th>
-          <th scope="col">Nombres</th>
-          <th scope="col">Ciclo</th>
-          <th scope="col">Grupo</th>
-          <th scope="col">Institucion</th>
-          <th scope="col">Filial</th>
-          <th scope="col">Facultad</th>
-          <th scope="col">E.P</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Acciones</th>
-        </tr>
-        </thead>
-        <tbody class="table-group-divider">
-        <tr *ngFor="let v of personsTutions ; let i=index">
-          <th scope="row">{{i + 1}}</th>
-          <td data-title="Código">{{v.codigo}}</td>
-          <td data-title="DNI">{{v.dni}}</td>
-          <td data-title="Nombres">{{v.nombres}}</td>
-          <td data-title="Ciclo">{{v.ciclo}}</td>
-          <td data-title="Grupo">{{v.grupo}}</td>
-          <td data-title="Institucion">{{v.escuelaProfesional!.facultad!.filial!.institucion!.descripcion!}}</td>
-          <td data-title="Filial">{{v.escuelaProfesional!.facultad!.filial!.descripcion!}}</td>
-          <td data-title="Facultad">{{v.escuelaProfesional!.facultad!.descripcion!}}</td>
-          <td data-title="E.P.">{{v.escuelaProfesional!.descripcion!}}</td>
-          <td data-title="Estado">
-                        <span class="badge text-bg-{{v.estado?'success': 'danger'}} text-white">
-                            {{v.estado ? 'Activo' : 'Inactivo'}}
-                        </span>
-          </td>
-
-          <td data-title="Acciones">
-
-            <button type="button" class="btn-gm-sm btn btn-danger text-white btn-gm-small"
-                    title="{{ abcForms.btnDelete.label }}" (click)="goDeletePerson(i)">
-              <span class="{{ abcForms.btnDelete.icon }}"></span>
-            </button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div>
-      <div class="mt-4 d-flex justify-content-end">
-        <button type="button" class="btn {{ abcForms.btnCancel.class }} btn-sm" (click)="cancelForm()">
-          <span class="{{ abcForms.btnCancel.icon }} lamb-icon"></span> {{ abcForms.btnCancel.label }}
-        </button>
-        <button type="button" class="btn {{ abcForms.btnSave.class }} btn-sm" (click)="saveForm()"
-                [disabled]="eventForm.invalid">
-          <span class="{{ abcForms.btnSave.icon }} lamb-icon"></span> {{ abcForms.btnSave.label }}
-        </button>
       </div>
-    </div>
   `
 })
 export class EventNewComponent implements OnInit {

@@ -21,9 +21,9 @@ import {PersonService} from "../../../../../../providers/services/setup/person.s
       <span class="{{ abcForms.btnReturn.icon }}"></span> Regresar
     </button>
     <div>
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs d-flex">
         <li class="nav-item">
-          <a class="nav-link active"><i class="{{ abcForms.btnNew.icon }}"></i> Nuevo Perido</a>
+          <a class="nav-link active"><i class="{{ abcForms.btnNew.icon }}"></i> Nueva Persona</a>
         </li>
       </ul>
       <form [formGroup]="personForm" class="row mt-2 d-flex justify-content-start align-items-center ">
