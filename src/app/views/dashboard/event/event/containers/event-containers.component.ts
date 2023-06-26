@@ -34,7 +34,6 @@ export class EventContainersComponent implements OnInit {
 
   public getEvents(params?: Object): void {
     this.eventService.getWithQuery$(params).subscribe(response => {
-      console.log(response);
       this.events = response;
     }, error => {
       this.error = error;

@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
   public login(): void {
     if (this.loginForm.valid) {
       this.oauthService.authenticate(this.loginForm.value).subscribe(response => {
-        console.log(response);
         if (response && localStorage.getItem('token')) {
           this.redirectInto();
         }
@@ -58,9 +57,7 @@ export class LoginComponent implements OnInit {
 
   public open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
-      //console.log(`Resultado: ${result}`);
-    }, (reason) => {
-      //console.log(`Razón: ${reason}`);
+      }, (reason) => {
     });
   }
 }

@@ -136,7 +136,7 @@ import {Person} from "../../../../Setup/person/models/person";
               </div>
 
           </form>
-
+          <hr>
           <div class="float-end">
               <button type="button" (click)="addActivity()" class="btn-gm-danger">
                   <span class="{{ abcForms.btnNew.icon }} lamb-icon"></span> {{ abcForms.btnNew.label }} Actividad

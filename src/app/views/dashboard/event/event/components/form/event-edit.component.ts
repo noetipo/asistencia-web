@@ -137,6 +137,7 @@ import {Tuition} from "../../models/tuition";
               </div>
 
           </form>
+          <hr>
           <div class="float-end">
               <button type="button" (click)="addActivity()" class="btn-gm-danger">
                   <span class="{{ abcForms.btnNew.icon }} lamb-icon"></span> {{ abcForms.btnNew.label }} Actividad
@@ -244,9 +245,9 @@ import {Tuition} from "../../models/tuition";
       </div>
 
       <div class="float-end">
-        <button type="button" class="btn-gm-danger" (click)="personTution()">
-          <span class="{{ abcForms.btnSave.icon }} lamb-icon"></span> Matricular
-        </button>
+          <button type="button" class="btn-gm-danger" (click)="personTution()">
+              <span class="{{ abcForms.btnSave.icon }} lamb-icon"></span> Matricular
+          </button>
       </div>
       <div class="responsive-table">
           <table class="table table-lg table-hover table-striped table-sm">
@@ -393,7 +394,7 @@ export class EventEditComponent implements OnInit {
   }
 
   public eventPathValue(event: Event): void {
-    console.log(event);
+
     // @ts-ignore
     this.eventForm.patchValue(event);
     this.eventForm.patchValue({
@@ -407,8 +408,6 @@ export class EventEditComponent implements OnInit {
       this.eventDetails.push(data);
     });
     this.tuitions = event.matriculas!;
-    console.log(this.tuitions);
-
   }
 
   public getCycles(idEscuelaProfesional: number): void {

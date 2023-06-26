@@ -206,7 +206,6 @@ export class AttendanceContainersComponent implements OnInit {
     this.attendanceForm.controls['evento'].valueChanges.subscribe(val => {
       // @ts-ignore
       this.event = val!;
-      console.log(this.event);
       this.eventDetails = this.event?.eventoDetalles!;
     });
     this.attendanceForm.controls['eventoDetalleId'].valueChanges.subscribe(val => {
@@ -252,7 +251,6 @@ export class AttendanceContainersComponent implements OnInit {
 
   public getEvents(id: number): void {
     this.eventService.getByProfessionalScholl$(id).subscribe(response => {
-      console.log(response);
       this.events = response;
     }, error => {
       this.error = error;
