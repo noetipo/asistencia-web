@@ -98,7 +98,7 @@ import {Attendance} from "../models/attendance";
         </div>
         <div class="form-group col-md-2 required">
           <div class="input-group input-group-sm">
-            <label class="col-form-label"><b>Evento. </b></label>
+            <label class="col-form-label"><b>DNI/CODIGO. </b></label>
           </div>
           <div class="input-group input-group-sm input-group-rounded">
             <input type="text" class="form-control form-control-sm" formControlName="dni"
